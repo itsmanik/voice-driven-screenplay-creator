@@ -54,7 +54,6 @@ export function SidebarItem(props) {
                         ? "bg-darkPurple text-white"
                         : "hover:bg-darkGray text-lightWhite"
                 }`}
-                onClick={console.log("test")}
             >
                 {props.icon}
                 <span

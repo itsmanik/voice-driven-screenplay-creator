@@ -3,11 +3,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/UI/Layout";
 import Home from "./components/Home/Home";
 import Chatbot from "./components/Chatbot/Chatbot";
-import NoPage from "./components/NoPage/NoPage"
-import NewMovie from "./components/NewMovie/NewMovie"
-import Senti from "./components/Senti/SentimentAnalysis"
+import NoPage from "./components/NoPage/NoPage";
+import NewMovie from "./components/NewMovie/NewMovie";
+import Senti from "./components/Senti/SentimentAnalysis";
 import LogIn from "./components/Auth/Login";
 import SignUp from "./components/Auth/SignUp";
+import Movies from "./components/Movie/Movies"
+import Scene from "./components/Movie/Scene";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
             <Route path="/senti" element={<Senti />} />
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/movies/:movieName" element={<Movies />} />
+            <Route path="/movies/:movieName/:sceneName" element={<Scene />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

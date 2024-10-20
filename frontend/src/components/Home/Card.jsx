@@ -1,7 +1,7 @@
 const Card = (props) => {
   return (
     <div>
-      <div className="max-w-sm p-4 shadow-md m-7 bg-transparent border border-gray-500   dark:text-gray-800">
+      <div onClick={props.onClick} className="max-w-sm p-4 cursor-pointer shadow-md m-7 bg-transparent border border-gray-500   dark:text-gray-800">
         <div className="pb-4 border-bottom">
           <div className="">
             <h1

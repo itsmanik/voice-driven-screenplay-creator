@@ -40,9 +40,21 @@ const Home = () => {
     fetchStories();
   }, []);
 
+  const cardSubmitHandler = async (id, data) => {
+    console.log("hi");
+    try {
+      const response = await axiosInstance.post(`/api/story/${id}/get_scenes`, data); // Use template literals here
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };  
+
   return (
     <>
-      {isOpenCreatePrompt && <NewMovieForm onCancel={isOpenCreatePromptHandler} />}
+      {isOpenCreatePrompt && (
+        <NewMovieForm onCancel={isOpenCreatePromptHandler} />
+      )}
       <div className="bg-black pb-20">
         <div className="flex justify-center pt-12">
           <Link
@@ -70,7 +82,8 @@ const Home = () => {
                 title={card.title}
                 shortDescription={card.shortDescription}
                 imgSrc={card.imgSrc}
-                date={card.date} // Display date information as needed
+                date={card.date}
+                onClick={cardSubmitHandler} // Display date information as needed
               />
             ))
           )}

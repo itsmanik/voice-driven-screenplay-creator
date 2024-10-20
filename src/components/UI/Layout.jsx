@@ -141,17 +141,18 @@ const DEFAULT_MOVIES = [
 export const UserContext = createContext();
 
 const Layout = () => {
-  const { movieName } = useParams();
-  const [movies, setMovies] = useState(DEFAULT_MOVIES);
-  const movie = movies.find((u) => u.movieName === movieName);
+  const [scenes, setScenes] = useState([]); // Store scenes for selected movie
+  const [movieSelected, setMovieSelected] = useState(false); // Track if a movie is selected
 
   return (
     <>
       <NavBar />
       <div className="flex">
-        <SideBar movie = { movie } />
+        {/* Conditionally render AsideNav based on movieSelected */}
+        {movieSelected && <SideBar scenes={scenes} />} 
+
         <div className="mt-12 relative overflow-y-scroll h-screen overflow-hidden w-full">
-          <UserContext.Provider value={movie}>
+          <UserContext.Provider value={{ setScenes, setMovieSelected }}>
             <Outlet />
           </UserContext.Provider>
         </div>

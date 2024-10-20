@@ -1,50 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axiosInstance from "../../axios"; // Ensure axiosInstance is set up correctly
 import Card from "./Card";
 import { Link } from "react-router-dom";
 import NewMovieForm from "../Forms/NewMovieForm";
 
 const Home = () => {
-  const [cardData, setCardData] = useState([
-    {
-      title: "La La Land",
-      shortDescription:
-        "A romantic musical about love and dreams in Los Angeles.",
-      longDescription:
-        "Mia, an actress, and Sebastian, a musician, pursue their dreams while navigating their romance in LA.",
-      imgSrc:
-        "https://www.themoviedb.org/t/p/original/jykA5xF1uA41yoy91B7OErg4YO7.jpg",
-    },
-    {
-      title: "Interstellar",
-      shortDescription: "A sci-fi journey through space to save humanity.",
-      longDescription:
-        "A team of explorers ventures through a wormhole to find a new habitable planet for mankind.",
-      imgSrc:
-        "https://uniathenaprods3.uniathena.com/s3fs-public/insights-article/interstellar_0.jpg",
-    },
-    {
-      title: "Inside Out 2",
-      shortDescription:
-        "Riley's emotions face new challenges as she grows older.",
-      longDescription:
-        "Joy, Sadness, and the rest of the emotions help Riley through new adventures as she becomes a teenager.",
-      imgSrc:
-        "https://preview.redd.it/inside-out-2-2024-first-look-v0-qv3j75pp1wza1.jpg?auto=webp&s=f33a51dc856bb61f6c59c14c1b83fc16dbfa56d8",
-    },
-    {
-      title: "3 Idiots",
-      shortDescription: "A comedy-drama about friendship and education.",
-      longDescription:
-        "Three friends navigate college life, pressures of education, and the pursuit of their dreams.",
-      imgSrc: "https://vistapointe.net/images/3-idiots-9.jpg",
-    },
-  ]);
-
+  const [cardData, setCardData] = useState([]);
   const [isOpenCreatePrompt, setIsOpenCreatePrompt] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const isOpenCreatePromptHandler = () => {
     setIsOpenCreatePrompt(!isOpenCreatePrompt);
   };
+
+  useEffect(() => {
+    // Fetch the stories from the API when the component mounts
+    const fetchStories = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const response = await axiosInstance.get("/api/get_stories");
+        const { scenes_data } = response.data;
+        // Map the fetched data to the format required for cardData
+        const formattedData = scenes_data.map((story) => ({
+          title: story.title,
+          shortDescription: story.description,
+          imgSrc: story.image_link,
+          date: `Created: ${new Date(story.created_at).toLocaleDateString()}`,
+        }));
+        setCardData(formattedData);
+      } catch (error) {
+        setError("Failed to load stories. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStories();
+  }, []);
 
   return (
     <>
@@ -62,17 +56,24 @@ const Home = () => {
             </span>
           </Link>
         </div>
+
         <div className="flex flex-wrap justify-center">
-          {/* Map over the cardData array to dynamically generate Card components */}
-          {cardData.map((card, index) => (
-            <Card
-              key={index}
-              title={card.title}
-              shortDescription={card.shortDescription}
-              longDescription={card.longDescription}
-              imgSrc={card.imgSrc}
-            />
-          ))}
+          {loading ? (
+            <p className="text-white">Loading...</p>
+          ) : error ? (
+            <p className="text-red-500">{error}</p>
+          ) : (
+            // Map over the cardData array to dynamically generate Card components
+            cardData.map((card, index) => (
+              <Card
+                key={index}
+                title={card.title}
+                shortDescription={card.shortDescription}
+                imgSrc={card.imgSrc}
+                date={card.date} // Display date information as needed
+              />
+            ))
+          )}
         </div>
       </div>
     </>

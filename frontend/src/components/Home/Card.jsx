@@ -28,8 +28,8 @@ const Card = (props) => {
                 {props.shortDescription}
               </h3>
             </a>
-            <p className="leading-snug text-gray-600">
-              {props.longDescription}
+            <p className="leading-snug text-gray-400">
+              {props.date}
             </p>
           </div>
         </div>

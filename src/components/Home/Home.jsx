@@ -9,6 +9,7 @@ const Home = () => {
   const [isOpenCreatePrompt, setIsOpenCreatePrompt] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [scene, setScene] = useState([]);
 
   const isOpenCreatePromptHandler = () => {
     setIsOpenCreatePrompt(!isOpenCreatePrompt);
@@ -28,6 +29,7 @@ const Home = () => {
           shortDescription: story.description,
           imgSrc: story.image_link,
           date: `Created: ${new Date(story.created_at).toLocaleDateString()}`,
+          id: story.id,
         }));
         setCardData(formattedData);
       } catch (error) {
@@ -43,12 +45,17 @@ const Home = () => {
   const cardSubmitHandler = async (id, data) => {
     console.log("hi");
     try {
-      const response = await axiosInstance.post(`/api/story/${id}/get_scenes`, data); // Use template literals here
+      const response = await axiosInstance.get(
+        `/api/story/${id}/get_scenes`,
+        data
+      ); // Use template literals here
       console.log(response.data);
+      setScene(response.data);
+      console.log(scene);
     } catch (error) {
       console.error(error);
     }
-  };  
+  };
 
   return (
     <>
@@ -83,7 +90,9 @@ const Home = () => {
                 shortDescription={card.shortDescription}
                 imgSrc={card.imgSrc}
                 date={card.date}
-                onClick={cardSubmitHandler} // Display date information as needed
+                onClick={() => {
+                  cardSubmitHandler(card.id);
+                }} // Display date information as needed
               />
             ))
           )}

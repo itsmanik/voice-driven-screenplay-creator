@@ -14,16 +14,14 @@ body {
   overflow-y: auto;
   scrollbar-width: thin; /* For Firefox */
   scrollbar-color: #888 #f4f4f4; /* For Firefox */
-  background-color: #f4f4f4;  /* Optional background color */
+  background-color: #f4f4f4; /* Optional background color */
+  margin: 0rem 5rem;
 }
 
 .screenplay-container {
-  font-family: 'Courier New', Courier, monospace;
-  padding: 20px;
- 
-  background-color: #f9f9f9;
+  font-family: "Courier New", Courier, monospace;
+  padding: 15px 50px;
   color: #333;
-  margin: auto 25%;
 }
 
 /* FADE IN */
@@ -87,20 +85,12 @@ shot {
   /* color: #696969; */
 }
 
-
-
-
 .download-button {
   margin-top: 20px;
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.download-button:hover {
-  background-color: #0056b3;
 }

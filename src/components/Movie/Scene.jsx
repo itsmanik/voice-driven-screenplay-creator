@@ -30,7 +30,7 @@ const Scene = (props) => {
       <div className="">
         {/* Conditionally rendering each section based on the selected section */}
         {currentSection === 1 && (
-          <section className="h-screen flex items-center justify-center">
+          <section className="min-h-screen flex items-start mt-8 justify-center">
             {/* ScreenPlay component */}
             <ScreenPlay data={screenPlay} /> {/* You don't need onSubmit here */}
           </section>

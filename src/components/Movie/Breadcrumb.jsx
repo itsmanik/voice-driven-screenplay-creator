@@ -5,7 +5,7 @@ import axiosInstance from "../../axios";
 const Breadcrumb = ({ currentSection, setCurrentSection, onSubmit }) => {
   const [screenPlayData, setScreenPlayData] = useState("");
   const { sceneId } = useParams();
-  
+
   // Function to fetch screenplay data
   const handleScreenPlay = async () => {
     try {
@@ -28,7 +28,10 @@ const Breadcrumb = ({ currentSection, setCurrentSection, onSubmit }) => {
   }, []); // Empty dependency array ensures this runs once on component mount
 
   return (
-    <nav className="flex items-center space-x-2 text-md justify-center" aria-label="Breadcrumb">
+    <nav
+      className="flex items-center space-x-2 text-md justify-center"
+      aria-label="Breadcrumb"
+    >
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         <li className="inline-flex items-center">
           <button

@@ -1,16 +1,13 @@
-import {useState} from "react";
+import { useState } from "react";
 import axiosInstance from "../../axios";
 import { Link, useNavigate } from "react-router-dom";
 
-
 const SignUp = () => {
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,8 +40,6 @@ const SignUp = () => {
       }
     }
   };
-
-
 
   return (
     <div className="bg-black h-screen flex justify-center items-center">

@@ -3,10 +3,10 @@ import { useState, useContext } from "react";
 import { UserContext } from "../UI/Layout";
 import VoiceCommand from "./VoiceCommand";
 import Senti from "./SentimentAnalysis";
-import ChatBot from "./Chatbot";
 import axiosInstance from "../../axios";
 import ScreenPlay from "./ScreenPlay";
 import Breadcrumb from "./Breadcrumb";
+import ChatBot from "../Chatbot/ChatBot"
 
 const Scene = (props) => {
   const [currentSection, setCurrentSection] = useState(1); // Track the active section
@@ -41,12 +41,12 @@ const Scene = (props) => {
           </section>
         )}
         {currentSection === 3 && (
-          <section className="h-screen flex items-center justify-center">
+          <section className="flex items-center justify-center">
             <Senti />
           </section>
         )}
         {currentSection === 4 && (
-          <section className="h-screen flex items-center justify-center">
+          <section className="flex items-center justify-center mt-8 mb-8 pb-8">
             <ChatBot />
           </section>
         )}

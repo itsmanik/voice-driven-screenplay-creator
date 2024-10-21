@@ -89,7 +89,10 @@ const SpeechToText = () => {
       <div className="buttons">
         <div></div>
         <div className="buttonsInnerDiv">
-          <button onClick={handleSubmit} className="submit-button relative px-8 py-2 ml-4 text-lg overflow-hidden font-semibold rounded text-white hover:bg-darkPurple transition-all bg-purple">
+          <button
+            onClick={handleSubmit}
+            className="submit-button relative px-8 py-2 ml-4 text-lg overflow-hidden font-semibold rounded text-white hover:bg-darkPurple transition-all bg-purple"
+          >
             Convert ✨
           </button>
           <button

@@ -1,10 +1,8 @@
 import axiosInstance from "../../axios";
-import {useState} from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-
 const LogIn = () => {
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -13,19 +11,19 @@ const LogIn = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage(""); // Clear any previous errors
-  
+
     try {
       const response = await axiosInstance.post("/api/login", {
         username,
         password,
       });
-  
+
       // Assuming the response contains the access token
       const { access_token } = response.data;
-  
+
       // Store the token in localStorage
       localStorage.setItem("jwtToken", access_token);
-  
+
       // Redirect to a secure page after login
       navigate("/"); // Or whichever page you want to redirect the user to
     } catch (error) {
@@ -36,16 +34,13 @@ const LogIn = () => {
       }
     }
   };
-  
 
   return (
     <div className="bg-black h-screen flex justify-center items-center">
       <div className="flex border border-gray-700 shadow shadow-gray-400 text-lightWhite flex-col max-w-md min-w-[25rem] px-10 pt-7 pb-5 rounded-md sm:px-10">
         <div className="mb-8 text-center">
           <h1 className="my-1 text-lightWhite text-4xl font-bold">Log In</h1>
-          <p className="text-sm dark:text-gray-600">
-            Log into your account
-          </p>
+          <p className="text-sm dark:text-gray-600">Log into your account</p>
         </div>
         {errorMessage && (
           <p className="text-red-500 text-center mb-4">{errorMessage}</p>

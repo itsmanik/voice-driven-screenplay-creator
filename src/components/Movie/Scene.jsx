@@ -6,7 +6,8 @@ import Senti from "./SentimentAnalysis";
 import axiosInstance from "../../axios";
 import ScreenPlay from "./ScreenPlay";
 import Breadcrumb from "./Breadcrumb";
-import ChatBot from "../Chatbot/ChatBot"
+import ChatBot from "../Chatbot/ChatBot";
+import Summary from "./Summary";
 
 const Scene = (props) => {
   const [currentSection, setCurrentSection] = useState(1); // Track the active section
@@ -32,7 +33,8 @@ const Scene = (props) => {
         {currentSection === 1 && (
           <section className="min-h-screen flex items-start mt-8 justify-center">
             {/* ScreenPlay component */}
-            <ScreenPlay data={screenPlay} /> {/* You don't need onSubmit here */}
+            <ScreenPlay data={screenPlay} />{" "}
+            {/* You don't need onSubmit here */}
           </section>
         )}
         {currentSection === 2 && (
@@ -48,6 +50,11 @@ const Scene = (props) => {
         {currentSection === 4 && (
           <section className="flex items-center justify-center mt-8 mb-8 pb-8">
             <ChatBot />
+          </section>
+        )}
+        {currentSection === 5 && (
+          <section className="flex items-center justify-center mt-8 mb-8 pb-8">
+            <Summary />
           </section>
         )}
       </div>

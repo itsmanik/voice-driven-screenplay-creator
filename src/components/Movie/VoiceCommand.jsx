@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
+import { useParams } from "react-router-dom";
+import axios from "../../axios";
 
 const SpeechToText = () => {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState(""); // Final transcript
   const [interimTranscript, setInterimTranscript] = useState(""); // For interim results
   const [recognition, setRecognition] = useState(null);
+  const [title, setTitle] = useState(""); // State for title input
+  const { movieId, sceneId } = useParams();
 
   useEffect(() => {
     const SpeechRecognition =
@@ -59,30 +63,48 @@ const SpeechToText = () => {
     }
   };
 
-  const handleSubmit = () => {
-    // try {
-    //   const response = await axiosInstance.post("/api/story/storyid/add", movieData);
-    //   console.log(response.data);
-    //   fetchStories();
-    //   setIsOpenCreatePrompt(false); // Close the form
-    // } catch (error) {
-    //   console.error(error);
-    //   setError("Failed to create movie.");
-    // } finally {
-    //   setLoading(false);
-    // }
+  const handleSubmit = async () => {
+    if (sceneId !== undefined) {
+      try {
+        const response = await axios.post(`/api/edit_scene_text/${sceneId}`, {
+          title,
+          transcript,
+        });
+        alert("Submission successful");
+      } catch (error) {
+        console.error("Error submitting transcript:", error);
+      }
+    } else {
+      try {
+        const response = await axios.post(`/api/story/${movieId}/add_scene`, {
+          title,
+          transcript,
+        });
+        alert("Submission successful");
+      } catch (error) {
+        console.error("Error submitting transcript:", error);
+      }
+    }
   };
 
   return (
     <div className="speech-to-text-container">
-      <p className="interim-transcript">‎ {interimTranscript}</p>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Enter scene title"
+        className="title-input rounded-md mb-4 px-4 py-2"
+      />
+      <p className="interim-transcript">Voice Preview: ‎ {interimTranscript}</p>
       <br />
       <textarea
         value={transcript}
-        onChange={(e) => setTranscript([e.target.value])}
+        onChange={(e) => setTranscript(e.target.value)}
         placeholder="Transcript will appear here"
         rows={13}
         cols={50}
+        name="content"
         className="transcript-textarea rounded-md"
       />
       <br />

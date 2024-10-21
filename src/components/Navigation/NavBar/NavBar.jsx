@@ -1,6 +1,21 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
+function CheckLocalStorage(key) {
+  const [hasValue, setHasValue] = useState(false);
+
+  useEffect(() => {
+    const storedValue = localStorage.getItem(key);
+    if (storedValue) {
+      setHasValue(true);
+    } else {
+      setHasValue(false);
+    }
+  }, [key]);
+
+  return hasValue;
+}
+
 const dropdownNavs = [
   {
     label: "Products",
@@ -194,6 +209,8 @@ const ProfileDropDown = (props) => {
 };
 
 const NavBar = () => {
+  const hasValueInLocalStorage = CheckLocalStorage("jwtToken");
+
   const [state, setState] = useState(false);
   const [drapdownState, setDrapdownState] = useState({
     isActive: false,
@@ -294,25 +311,33 @@ const NavBar = () => {
                   </li>
                 );
               })}
-
-              <div className="flex items-center justify-center gap-x-6 space-y-3 lg:flex lg:space-y-0">
-                <li>
-                  <Link
-                    to={"/login"}
-                    className="block py-2 px-3 text-white font-bold text-center bg-[#2F2F35] hover:bg-[#3f3f45] border rounded lg:border-none"
-                  >
-                    Log In
-                  </Link>
-                </li>
-                <li>
-                  <Link
+              {!hasValueInLocalStorage ? (
+                <div className="flex items-center justify-center gap-x-6 space-y-3 lg:flex lg:space-y-0">
+                  <li>
+                    <Link
+                      to={"/login"}
+                      className="block py-2 px-3 text-white font-bold text-center bg-[#2F2F35] hover:bg-[#3f3f45] border rounded lg:border-none"
+                    >
+                      Log In
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to={"/signup"}
+                      className="block py-2 font-bold px-3 text-center text-white bg-[#9147FF] hover:bg-[#822fff] active:bg-indigo-700 active:shadow-none rounded shadow lg:inline"
+                    >
+                      Sign Up
+                    </Link>
+                  </li>
+                </div>
+              ) : (
+                <Link
                     to={"/signup"}
-                    className="block py-2 font-bold px-3 text-center text-white bg-[#9147FF] hover:bg-[#822fff] active:bg-indigo-700 active:shadow-none rounded shadow lg:inline"
-                  >
-                    Sign Up
-                  </Link>
-                </li>
-              </div>
+                      className="block py-2 font-bold px-3 text-center text-white bg-[#9147FF] hover:bg-[#822fff] active:bg-indigo-700 active:shadow-none rounded shadow lg:inline"
+                    >
+                      Logout
+                    </Link>
+              )}
             </ul>
           </div>
         </div>

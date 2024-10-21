@@ -93,6 +93,21 @@ const Breadcrumb = ({ currentSection, setCurrentSection, onSubmit }) => {
             </button>
           </div>
         </li>
+        <li aria-current="page">
+          <div className="flex items-center">
+            <span className="text-gray-500">/</span>
+            <button
+              onClick={() => setCurrentSection(5)}
+              className={`ml-2 ${
+                currentSection === 5
+                  ? "text-blue-200"
+                  : "text-purple hover:darkPurple"
+              }`}
+            >
+              Summary
+            </button>
+          </div>
+        </li>
       </ol>
     </nav>
   );

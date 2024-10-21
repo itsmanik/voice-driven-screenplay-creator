@@ -158,10 +158,9 @@ const Layout = () => {
         setMovieSelected(movieId);
         setMovieSelected(true);
       } catch (error) {
-        console.error(error);
         setError("Failed to load scenes.");
       } finally {
-        setLoading(false);
+  //setLoading(false);
       }
     };
     fetchScenes();

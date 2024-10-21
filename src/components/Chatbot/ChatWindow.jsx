@@ -3,7 +3,7 @@ import { FaUser, FaRobot, FaFilm } from "react-icons/fa";
 
 const ChatWindow = ({ messages }) => {
   return (
-    <div className="chat-window relative">
+    <div className="chat-window relative bottom-5">
       {messages.length === 0 ? (
         <div className="no-messages">
           <FaFilm className="nomsgicon" />

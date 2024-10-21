@@ -9,7 +9,7 @@ import SignUp from "./components/Auth/SignUp";
 import Movies from "./components/Movie/Movies"
 import Scene from "./components/Movie/Scene";
 import VoiceToText from "./components/UI/VoiceCommand"
-
+import CreateScene from "./components/Movie/CreateScene"
 function App() {
   return (
     <>
@@ -21,7 +21,7 @@ function App() {
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} /> 
             <Route path="/movies/:movieId/:sceneId" element={<Scene />} />
-            <Route path="/movies/:movieId/newscene" element={<VoiceToText />} />
+            <Route path="/movies/:movieId/new-scene" element={<CreateScene />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

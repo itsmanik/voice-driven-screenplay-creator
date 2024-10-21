@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import axiosInstance from "../../axios";
 import Card from "./Card";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ const Home = () => {
   const [isOpenCreatePrompt, setIsOpenCreatePrompt] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [iid, setIid] = useState(0);
 
   const { setScenes, setMovieSelected } = useContext(UserContext);
 
@@ -43,12 +44,14 @@ const Home = () => {
   }, []);
 
   const cardSubmitHandler = async (id) => {
+    setIid(id);
     setLoading(true);
     try {
       const response = await axiosInstance.get(`/api/story/${id}/get_scenes`);
       const scenes_data = response.data.scenes_data;
       setScenes(scenes_data);
       setMovieSelected(true);
+      setLoading(false);
     } catch (error) {
       console.error(error);
       setError("Failed to load scenes.");
@@ -105,7 +108,7 @@ const Home = () => {
                 title={card.title}
                 shortDescription={card.shortDescription}
                 imgSrc={card.imgSrc}
-                date={card.date}
+                date={card.id +": " + card.date}
                 onClick={() => cardSubmitHandler(card.id)}
               />
             ))

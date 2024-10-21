@@ -34,7 +34,7 @@ fadein {
 }
 
 /* Scene Heading */
-scene-heading {
+heading {
   display: block;
   font-size: 20px;
   font-weight: bold;
@@ -71,7 +71,7 @@ quote {
 }
 
 /* Intercut Heading */
-intercut-heading {
+sub-heading {
   display: block;
   font-size: 18px;
   margin-top: 20px;

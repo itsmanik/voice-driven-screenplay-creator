@@ -1,4 +1,4 @@
-import { LifeBuoy, Settings, Film } from "lucide-react";
+import { LifeBuoy, Settings, Film, Plus } from "lucide-react";
 import Sidebar, { SidebarItem } from "./Sidebar";
 import { useLocation } from "react-router-dom";
 
@@ -9,10 +9,9 @@ const AsideNav = ({ scenes, movieId }) => {
     <div className="flex">
       <Sidebar movieName={scenes.story_name}>
         {/* Always show "Create New Scene" at the top */}
-        {console.log(movieId)}
         <SidebarItem
           key="create-scene"
-          icon={<Film size={20} />}
+          icon={<Plus size={20} />}
           text={"Create New Scene"}
           location={`/movies/${movieId}/new-scene`}
         />

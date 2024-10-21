@@ -8,6 +8,7 @@ import LogIn from "./components/Auth/Login";
 import SignUp from "./components/Auth/SignUp";
 import Movies from "./components/Movie/Movies"
 import Scene from "./components/Movie/Scene";
+import VoiceToText from "./components/UI/VoiceCommand"
 
 function App() {
   return (
@@ -18,9 +19,9 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/create" element={<NewMovie />} />
             <Route path="/login" element={<LogIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/movies/:movieId" element={<Movies />} />
+            <Route path="/signup" element={<SignUp />} /> 
             <Route path="/movies/:movieId/:sceneId" element={<Scene />} />
+            <Route path="/movies/:movieId/newscene" element={<VoiceToText />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

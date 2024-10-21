@@ -3,6 +3,7 @@ import NavBar from "../Navigation/NavBar/NavBar";
 import SideBar from "../Navigation/NavBar/AsideNav";
 import { useParams } from "react-router-dom";
 import { useState, useEffect, createContext } from "react";
+import axiosInstance from "../../axios";
 
 const DEFAULT_MOVIES = [
   {
@@ -141,18 +142,47 @@ const DEFAULT_MOVIES = [
 export const UserContext = createContext();
 
 const Layout = () => {
+  const { movieId } = useParams();
   const [scenes, setScenes] = useState([]); // Store scenes for selected movie
-  const [movieSelected, setMovieSelected] = useState(false); // Track if a movie is selected
+  const [movieSelected, setMovieSelected, movieSelectedId, setMovieSelectedId] =
+    useState(false); // Track if a movie is selected
 
+  useEffect(() => {
+    const fetchScenes = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `/api/story/${movieId}/get_scenes`
+        );
+        const scenes_data = response.data.scenes_data;
+        setScenes(scenes_data);
+        setMovieSelected(movieId);
+        setMovieSelected(true);
+      } catch (error) {
+        console.error(error);
+        setError("Failed to load scenes.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchScenes();
+  });
   return (
     <>
       <NavBar />
       <div className="flex">
         {/* Conditionally render AsideNav based on movieSelected */}
-        {movieSelected && <SideBar scenes={scenes} />} 
+        {<SideBar scenes={scenes} movieId={movieId} />}
 
         <div className="mt-12 relative overflow-y-scroll h-screen overflow-hidden w-full">
-          <UserContext.Provider value={{ setScenes, setMovieSelected }}>
+          <UserContext.Provider
+            value={{
+              movieSelectedId,
+              setMovieSelectedId,
+              movieSelected,
+              setMovieSelected,
+              setScenes,
+            }}
+          >
             <Outlet />
           </UserContext.Provider>
         </div>

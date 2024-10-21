@@ -59,7 +59,19 @@ const SpeechToText = () => {
     }
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    // try {
+    //   const response = await axiosInstance.post("/api/story/storyid/add", movieData);
+    //   console.log(response.data);
+    //   fetchStories();
+    //   setIsOpenCreatePrompt(false); // Close the form
+    // } catch (error) {
+    //   console.error(error);
+    //   setError("Failed to create movie.");
+    // } finally {
+    //   setLoading(false);
+    // }
+  };
 
   return (
     <div className="speech-to-text-container">

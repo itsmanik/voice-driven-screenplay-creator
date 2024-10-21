@@ -7,7 +7,7 @@ const AsideNav = ({ scenes }) => {
 
   return (
     <div className="flex">
-      <Sidebar>
+      <Sidebar movieName={scenes.story_name}>
         {/* Always show "Create New Scene" at the top */}
         <SidebarItem key="create-scene" icon={<Film size={20} />} text={"Create New Scene"} />
 
@@ -20,9 +20,9 @@ const AsideNav = ({ scenes }) => {
               text={scene.title}
               location={
                 "/movies/" +
-                scene.story_name.replace(/\s/g, "") +
+                scene.story_id +
                 "/" +
-                scene.title.replace(/\s/g, "")
+                scene.id
               }
             />
           ))

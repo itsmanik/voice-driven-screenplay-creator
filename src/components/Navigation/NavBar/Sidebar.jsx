@@ -19,7 +19,7 @@ export default function Sidebar({ children }) {
                                 expanded ? "w-15" : "hidden"
                             }`}
                         >
-                            Movies
+                            Scenes
                         </span>
                         <button
                             onClick={() => setExpanded((curr) => !curr)}

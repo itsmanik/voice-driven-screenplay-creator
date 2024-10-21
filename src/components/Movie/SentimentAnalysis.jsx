@@ -15,7 +15,7 @@ const SentimentAnalysis = ({ sceneId }) => {
 
     try {
       // Make a POST request to fetch sentiment analysis for the given sceneId
-      const response = await axiosInstance.post(`/api/sentiment_analysis/scene/${sceneId}`);
+      const response = await axiosInstance.get(`/api/sentiment_analysis/scene/${sceneId}`);
 
       // Update the state with the new data from the API response
       const { emoji, desc } = response.data;

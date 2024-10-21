@@ -19,8 +19,8 @@ function App() {
             <Route path="/create" element={<NewMovie />} />
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/movies/:movieName" element={<Movies />} />
-            <Route path="/movies/:movieName/:sceneName" element={<Scene />} />
+            <Route path="/movies/:movieId" element={<Movies />} />
+            <Route path="/movies/:movieId/:sceneId" element={<Scene />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
